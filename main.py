@@ -6,7 +6,7 @@ from pathlib import Path
 import uvicorn
 
 app = FastAPI()
-server = app.server
+
 
 @app.get('/api/get')
 async def get(avatar: Annotated[str | None, Header()] = None, answers: Annotated[list[int] | None, Header()] = None):
@@ -19,5 +19,5 @@ async def get(avatar: Annotated[str | None, Header()] = None, answers: Annotated
     return FileResponse(image_path)
 
 
-# if __name__ == '__main__':
-#     uvicorn.run(app)
+if __name__ == '__main__':
+    uvicorn.run(app)
