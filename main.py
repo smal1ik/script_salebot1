@@ -1,21 +1,18 @@
-import urllib.request as request
 from fastapi import FastAPI, Header
 from fastapi.responses import FileResponse
-
+from image_generator import *
 from pathlib import Path
 import uvicorn
 
 app = FastAPI()
 
 
-@app.get('/api/get/')
-async def get():
-    img = "https://files.salebot.pro/uploads/avatars/332056/1-288193541-365276269.jpg"
-    resource = request.urlopen(img)
-    out = open("img.jpg", 'wb')
-    out.write(resource.read())
-    out.close()
-    image_path = Path("img.jpg")
+@app.get('/api/get')
+async def get(url_avatar):
+
+    uuid = generate(url_avatar)
+    image_path = Path(f"generated_images/{uuid}.jpg")
+
     return FileResponse(image_path)
 
 
