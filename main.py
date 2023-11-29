@@ -9,8 +9,8 @@ app = FastAPI()
 
 @app.get('/api/get')
 async def get(url_avatar, answers):
+    dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    dir = os.path.abspath(os.curdir)
     uuid = generate(url_avatar)
     image_path = Path(f"{dir}/generated_images/{uuid}.jpg")
 

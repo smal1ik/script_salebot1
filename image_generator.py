@@ -5,7 +5,7 @@ import os
 
 def generate(url_avatar):
 
-    dir = os.path.abspath(os.curdir)
+    dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     uuid = str(uuid4())
     resource = request.urlopen(url_avatar)
 
