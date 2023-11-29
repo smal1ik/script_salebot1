@@ -1,23 +1,24 @@
 from PIL import Image
 import urllib.request as request
 from uuid import uuid4
+import os
 
 def generate(url_avatar):
 
+    dir = os.path.abspath(os.curdir)
     uuid = str(uuid4())
     resource = request.urlopen(url_avatar)
 
     avatar = Image.open(resource)
-    mask = Image.open('images/mask.jpg')
-    img_1 = Image.open('images/img_1.jpg')
-    mask_1 = Image.open("images/mask_1.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_2 = Image.open('images/img_2.jpg')
-    mask_2 = Image.open("images/mask_2.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_3 = Image.open('images/img_3.jpg')
-    mask_3 = Image.open("images/mask_3.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_4 = Image.open('images/4.1.jpg')
-    mask_4 = Image.open("images/mask_bomb.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_5 = Image.open('images/5.1.jpg')
+    mask = Image.open(f'{dir}/images/mask.jpg')
+    img_1 = Image.open(f'{dir}/images/img_1.jpg')
+    mask_1 = Image.open(f"{dir}/images/mask_1.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    img_2 = Image.open(f'{dir}/images/img_2.jpg')
+    mask_2 = Image.open(f"{dir}/images/mask_2.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    img_3 = Image.open(f'{dir}/images/img_3.jpg')
+    mask_3 = Image.open(f"{dir}/images/mask_3.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    img_4 = Image.open(f'{dir}/images/4.1.jpg')
+    img_5 = Image.open(f'{dir}/images/5.1.jpg')
 
     # Аватарка
     X_SCALE_AVATAR = 81/avatar.width
@@ -84,5 +85,5 @@ def generate(url_avatar):
     mask.paste(img_1, (X_MASK_1, Y_MASK_1), mask_1)
     mask.paste(img_2, (X_MASK_2, Y_MASK_2), mask_2)
     mask.paste(img_3, (X_MASK_3, Y_MASK_3), mask_3)
-    mask.save(f"generated_images/{uuid}.jpg")
+    mask.save(f"{dir}/generated_images/{uuid}.jpg")
     return uuid
