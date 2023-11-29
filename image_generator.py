@@ -2,22 +2,30 @@ from PIL import Image
 import urllib.request as request
 from uuid import uuid4
 
-def generate(url_avatar):
+def generate(url_avatar, answers):
 
     uuid = str(uuid4())
     resource = request.urlopen(url_avatar)
-
     avatar = Image.open(resource)
     mask = Image.open('images/mask.jpg')
-    img_1 = Image.open('images/img_1.jpg')
-    mask_1 = Image.open("images/mask_1.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_2 = Image.open('images/img_2.jpg')
-    mask_2 = Image.open("images/mask_2.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_3 = Image.open('images/img_3.jpg')
-    mask_3 = Image.open("images/mask_3.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_4 = Image.open('images/4.1.jpg')
-    mask_4 = Image.open("images/mask_bomb.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
-    img_5 = Image.open('images/5.1.jpg')
+
+    if answers[0] == 1:
+        img_1 = Image.open('images/img_1_1.jpg')
+        mask_1 = Image.open("images/mask_1_1.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    else:
+        img_1 = Image.open('images/img_1_2.jpg')
+        mask_1 = Image.open("images/mask_1_2.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    if answers[1] == 1:
+        img_2 = Image.open('images/img_2.jpg')
+        mask_2 = Image.open("images/mask_2.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    if answers[2] == 1:
+        img_3 = Image.open('images/img_3.jpg')
+        mask_3 = Image.open("images/mask_3.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    if answers[3] == 1:
+        img_4 = Image.open('images/4.1.jpg')
+        mask_4 = Image.open("images/mask_bomb.jpg").point(lambda x: 255 if x > 50 else 0).convert("1")
+    if answers[4] == 1:
+        img_5 = Image.open('images/5.1.jpg')
 
     # Аватарка
     X_SCALE_AVATAR = 81/avatar.width

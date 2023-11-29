@@ -8,9 +8,12 @@ app = FastAPI()
 
 
 @app.get('/api/get')
-async def get(url_avatar, answers):
-
-    uuid = generate(url_avatar)
+async def get(url_avatar: str, answers: str):
+    arr = []
+    for elem in answers:
+        arr.append(int(elem))
+    print(arr)
+    uuid = generate(url_avatar, arr)
     image_path = Path(f"generated_images/{uuid}.jpg")
 
     return FileResponse(image_path)
