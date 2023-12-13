@@ -7,7 +7,7 @@ import uvicorn
 app = FastAPI()
 
 @app.get('/api/get')
-async def get(url_avatar: str, answers: str, telegram_id: str):
+async def post(url_avatar: str, answers: str, telegram_id: str):
     try:
         arr = []
         for elem in answers:
@@ -17,6 +17,7 @@ async def get(url_avatar: str, answers: str, telegram_id: str):
         return {"status": "ok"}
     except:
         return {"status": "ne ok"}
+
 
 @app.get('/api/get_save/{telegram_id}')
 async def get_save(telegram_id):
